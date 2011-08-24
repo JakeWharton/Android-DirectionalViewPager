@@ -10,24 +10,18 @@ Usage
 
 *For a working implementation of this project see the `sample/` folder.*
 
-  1. Include one of the widgets in your view. This should usually be placed
-     adjacent to the `ViewPager` it represents.
+  1. Include the widget in your view.
 
-        <com.jakewharton.android.viewpagerindicator.TitlePageIndicator
-            android:id="@+id/titles"
-            android:layout_height="wrap_content"
+        <com.jakewharton.android.verticalviewpager.VerticalViewPager
+            android:id="@+id/pager"
+            android:layout_height="fill_parent"
             android:layout_width="fill_parent" />
 
   2. In your `onCreate` method (or `onCreateView` for a fragment), bind the
-     indicator to the `ViewPager`.
+     indicator to a `PagerAdapter` implementation.
 
-         //Set the pager with an adapter
-         ViewPager pager = (ViewPager)findViewById(R.id.pager);
+         VerticalViewPager pager = (VerticalViewPager)findViewById(R.id.pager);
          pager.setAdapter(new TestAdapter(getSupportFragmentManager()));
-
-         //Bind the title indicator to the adapter
-         TitlePageIndicator titleIndicator = (TitlePageIndicator)findViewById(R.id.titles);
-         titleIndicator.setViewPager(pager);
 
 
 Including In Your Project
