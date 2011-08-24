@@ -31,7 +31,7 @@ Android-ViewPagerIndicator is presented as a standalone `.jar` file. It should
 included in addition to the compatibility library `.jar`.
 
 You can download the file from the GitHub [downloads page][2] or compile your
-own by running `mvn clean package` (it will be in the `target/` folder).
+own by running `mvn clean package` (it will be in the `library/target/` folder).
 
 If you are using maven you can easily include the library by specifying it
 as a dependency:
