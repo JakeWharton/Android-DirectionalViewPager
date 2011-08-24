@@ -17,8 +17,8 @@ Usage
             android:layout_height="fill_parent"
             android:layout_width="fill_parent" />
 
-  2. In your `onCreate` method (or `onCreateView` for a fragment), bind the
-     indicator to a `PagerAdapter` implementation.
+  2. In your `onCreate` method (or `onCreateView` for a fragment), bind to a
+     `PagerAdapter` implementation.
 
          VerticalViewPager pager = (VerticalViewPager)findViewById(R.id.pager);
          pager.setAdapter(new TestAdapter(getSupportFragmentManager()));
