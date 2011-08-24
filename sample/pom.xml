@@ -36,7 +36,7 @@
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<finalName>${project.artifactId}-unaligned</finalName>
+		<finalName>${project.artifactId}-${project.version}-unaligned</finalName>
 
 		<plugins>
 			<plugin>
@@ -73,7 +73,7 @@
 						<configuration>
 							<zipalign>
 								<inputApk>${project.build.directory}/${project.build.finalName}.apk</inputApk>
-								<outputApk>${project.build.directory}/${project.artifactId}.apk</outputApk>
+								<outputApk>${project.build.directory}/${project.artifactId}-${project.version}.apk</outputApk>
 							</zipalign>
 						</configuration>
 						<executions>
