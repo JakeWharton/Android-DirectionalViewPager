@@ -522,7 +522,7 @@ public class DirectionalViewPager extends LinearLayout {
 		} else {
 			scrollTo(0, mCurItem*getHeight());
 		}
-		invalidate();
+		requestLayout();
 	}
 
 	@Override
