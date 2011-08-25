@@ -38,6 +38,7 @@ import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Scroller;
 
@@ -526,7 +527,7 @@ public class DirectionalViewPager extends LinearLayout {
     }
 
     @Override
-    public void addView(View child, int index, LayoutParams params) {
+    public void addView(View child, int index, ViewGroup.LayoutParams params) {
         if (mInLayout) {
             addViewInLayout(child, index, params);
             child.measure(mChildWidthMeasureSpec, mChildHeightMeasureSpec);
