@@ -17,7 +17,7 @@ public final class TestFragment extends Fragment {
 		TestFragment fragment = new TestFragment();
 
 		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 30; i++) {
 			builder.append(content).append(" ");
 		}
 		builder.deleteCharAt(builder.length() - 1);
