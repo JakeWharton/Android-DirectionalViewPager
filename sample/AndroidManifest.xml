@@ -7,7 +7,7 @@
 
     <uses-sdk android:minSdkVersion="4" />
 
-    <application android:label="VerticalViewPager Sample">
+    <application android:label="DirectionalViewPager Sample">
         <activity android:name=".SampleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
