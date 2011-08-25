@@ -139,11 +139,11 @@ public class DirectionalViewPager extends LinearLayout {
     public DirectionalViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         initViewPager();
-        
+
         //We default to horizontal, only change if a value is explicitly specified
         int orientation = attrs.getAttributeIntValue(XML_NS, "orientation", -1);
         if (orientation != -1) {
-        	setOrientation(orientation);
+            setOrientation(orientation);
         }
     }
 
@@ -227,11 +227,11 @@ public class DirectionalViewPager extends LinearLayout {
         mCurItem = item;
         populate();
         if (smoothScroll) {
-        	if (mIsHorizontal) {
-        		smoothScrollTo(getWidth()*item, 0);
-        	} else {
-        		smoothScrollTo(0, getHeight()*item);
-        	}
+            if (mIsHorizontal) {
+                smoothScrollTo(getWidth()*item, 0);
+            } else {
+                smoothScrollTo(0, getHeight()*item);
+            }
             if (dispatchSelected && mOnPageChangeListener != null) {
                 mOnPageChangeListener.onPageSelected(item);
             }
@@ -241,9 +241,9 @@ public class DirectionalViewPager extends LinearLayout {
             }
             completeScroll();
             if (mIsHorizontal) {
-            	scrollTo(getWidth()*item, 0);
+                scrollTo(getWidth()*item, 0);
             } else {
-            	scrollTo(0, getHeight()*item);
+                scrollTo(0, getHeight()*item);
             }
         }
     }
@@ -494,38 +494,38 @@ public class DirectionalViewPager extends LinearLayout {
     }
 
     @Override
-	public int getOrientation() {
-		return mIsHorizontal ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL;
-	}
+    public int getOrientation() {
+        return mIsHorizontal ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL;
+    }
 
-	@Override
-	public void setOrientation(int orientation) {
-		if (orientation == getOrientation()) {
-			return;
-		}
-		
-		//Complete any scroll we are currently in the middle of
-		completeScroll();
-		
-		//Reset values
-		mInitialMotion = 0;
-		mLastMotionX = 0;
-		mLastMotionY = 0;
-		if (mVelocityTracker != null) {
-			mVelocityTracker.clear();
-		}
-		
-		//Adjust scroll for new orientation
-		mIsHorizontal = (orientation == LinearLayout.HORIZONTAL);
-		if (mIsHorizontal) {
-			scrollTo(mCurItem*getWidth(), 0);
-		} else {
-			scrollTo(0, mCurItem*getHeight());
-		}
-		requestLayout();
-	}
+    @Override
+    public void setOrientation(int orientation) {
+        if (orientation == getOrientation()) {
+            return;
+        }
 
-	@Override
+        //Complete any scroll we are currently in the middle of
+        completeScroll();
+
+        //Reset values
+        mInitialMotion = 0;
+        mLastMotionX = 0;
+        mLastMotionY = 0;
+        if (mVelocityTracker != null) {
+            mVelocityTracker.clear();
+        }
+
+        //Adjust scroll for new orientation
+        mIsHorizontal = (orientation == LinearLayout.HORIZONTAL);
+        if (mIsHorizontal) {
+            scrollTo(mCurItem*getWidth(), 0);
+        } else {
+            scrollTo(0, mCurItem*getHeight());
+        }
+        requestLayout();
+    }
+
+    @Override
     public void addView(View child, int index, LayoutParams params) {
         if (mInLayout) {
             addViewInLayout(child, index, params);
@@ -600,17 +600,17 @@ public class DirectionalViewPager extends LinearLayout {
 
         // Make sure scroll position is set correctly.
         if (mIsHorizontal) {
-        	int scrollPos = mCurItem*w;
-        	if (scrollPos != getScrollX()) {
-        		completeScroll();
-        		scrollTo(scrollPos, getScrollY());
-        	}
+            int scrollPos = mCurItem*w;
+            if (scrollPos != getScrollX()) {
+                completeScroll();
+                scrollTo(scrollPos, getScrollY());
+            }
         } else {
-        	int scrollPos = mCurItem*h;
-        	if (scrollPos != getScrollY()) {
-            	completeScroll();
-            	scrollTo(getScrollX(), scrollPos);
-        	}
+            int scrollPos = mCurItem*h;
+            if (scrollPos != getScrollY()) {
+                completeScroll();
+                scrollTo(getScrollX(), scrollPos);
+            }
         }
     }
 
@@ -620,7 +620,7 @@ public class DirectionalViewPager extends LinearLayout {
         populate();
         mInLayout = false;
 
-        final int count = getChildCount(); 
+        final int count = getChildCount();
         final int size = mIsHorizontal ? r-l : b-t;
 
         for (int i = 0; i < count; i++) {
@@ -631,9 +631,9 @@ public class DirectionalViewPager extends LinearLayout {
                 int childLeft = getPaddingLeft();
                 int childTop = getPaddingTop();
                 if (mIsHorizontal) {
-                	childLeft += off;
+                    childLeft += off;
                 } else {
-                	childTop += off;
+                    childTop += off;
                 }
                 if (DEBUG) Log.v(TAG, "Positioning #" + i + " " + child + " f=" + ii.object
                 + ":" + childLeft + "," + childTop + " " + child.getMeasuredWidth()
@@ -661,20 +661,20 @@ public class DirectionalViewPager extends LinearLayout {
                 }
 
                 if (mOnPageChangeListener != null) {
-                	int size;
-                	int value;
-                	if (mIsHorizontal) {
-                		size = getWidth();
-                		value = x;
-                	} else {
-                		size = getHeight();
-                		value = y;
-                	}
-                	
-                	final int position = value / size;
-                	final int offsetPixels = value % size;
-                	final float offset = (float) offsetPixels / size;
-            		mOnPageChangeListener.onPageScrolled(position, offset, offsetPixels);
+                    int size;
+                    int value;
+                    if (mIsHorizontal) {
+                        size = getWidth();
+                        value = x;
+                    } else {
+                        size = getHeight();
+                        value = y;
+                    }
+
+                    final int position = value / size;
+                    final int offsetPixels = value % size;
+                    final float offset = (float) offsetPixels / size;
+                    mOnPageChangeListener.onPageScrolled(position, offset, offsetPixels);
                 }
 
                 // Keep on drawing until the animation has finished.
@@ -773,16 +773,16 @@ public class DirectionalViewPager extends LinearLayout {
                 final float yDiff = Math.abs(y - mLastMotionY);
                 float primaryDiff;
                 float secondaryDiff;
-                
+
                 if (mIsHorizontal) {
-                	primaryDiff = xDiff;
-                	secondaryDiff = yDiff;
+                    primaryDiff = xDiff;
+                    secondaryDiff = yDiff;
                 } else {
-                	primaryDiff = yDiff;
-                	secondaryDiff = xDiff;
+                    primaryDiff = yDiff;
+                    secondaryDiff = xDiff;
                 }
-                
-                
+
+
                 if (DEBUG) Log.v(TAG, "Moved x to " + x + "," + y + " diff=" + xDiff + "," + yDiff);
 
                 if (primaryDiff > mTouchSlop && primaryDiff > secondaryDiff) {
@@ -790,9 +790,9 @@ public class DirectionalViewPager extends LinearLayout {
                     mIsBeingDragged = true;
                     setScrollState(SCROLL_STATE_DRAGGING);
                     if (mIsHorizontal) {
-                    	mLastMotionX = x;
+                        mLastMotionX = x;
                     } else {
-                    	mLastMotionY = y;
+                        mLastMotionY = y;
                     }
                     setScrollingCacheEnabled(true);
                 } else {
@@ -813,13 +813,13 @@ public class DirectionalViewPager extends LinearLayout {
                  * Remember location of down touch.
                  * ACTION_DOWN always refers to pointer index 0.
                  */
-            	if (mIsHorizontal) {
-            		mLastMotionX = mInitialMotion = ev.getX();
-            		mLastMotionY = ev.getY();
-            	} else {
+                if (mIsHorizontal) {
+                    mLastMotionX = mInitialMotion = ev.getX();
+                    mLastMotionY = ev.getY();
+                } else {
                     mLastMotionX = ev.getX();
                     mLastMotionY = mInitialMotion = ev.getY();
-            	}
+                }
                 mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
 
                 if (mScrollState == SCROLL_STATE_SETTLING) {
@@ -882,9 +882,9 @@ public class DirectionalViewPager extends LinearLayout {
 
                 // Remember where the motion event started
                 if (mIsHorizontal) {
-                	mLastMotionX = mInitialMotion = ev.getX();
+                    mLastMotionX = mInitialMotion = ev.getX();
                 } else {
-                	mLastMotionY = mInitialMotion = ev.getY();
+                    mLastMotionY = mInitialMotion = ev.getY();
                 }
                 mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
                 break;
@@ -898,24 +898,24 @@ public class DirectionalViewPager extends LinearLayout {
                     final float yDiff = Math.abs(y - mLastMotionY);
                     float primaryDiff;
                     float secondaryDiff;
-                    
+
                     if (mIsHorizontal) {
-                    	primaryDiff = xDiff;
-                    	secondaryDiff = yDiff;
+                        primaryDiff = xDiff;
+                        secondaryDiff = yDiff;
                     } else {
-                    	primaryDiff = yDiff;
-                    	secondaryDiff = xDiff;
+                        primaryDiff = yDiff;
+                        secondaryDiff = xDiff;
                     }
-                    
-                    
+
+
                     if (DEBUG) Log.v(TAG, "Moved x to " + x + "," + y + " diff=" + xDiff + "," + yDiff);
                     if (primaryDiff > mTouchSlop && primaryDiff > secondaryDiff) {
                         if (DEBUG) Log.v(TAG, "Starting drag!");
                         mIsBeingDragged = true;
                         if (mIsHorizontal) {
-                        	mLastMotionX = x;
+                            mLastMotionX = x;
                         } else {
-                        	mLastMotionY = y;
+                            mLastMotionY = y;
                         }
                         setScrollState(SCROLL_STATE_DRAGGING);
                         setScrollingCacheEnabled(true);
@@ -927,18 +927,18 @@ public class DirectionalViewPager extends LinearLayout {
                             ev, mActivePointerId);
                     final float x = MotionEventCompat.getX(ev, activePointerIndex);
                     final float y = MotionEventCompat.getY(ev, activePointerIndex);
-                    
+
                     int size;
                     float scroll;
-                    
+
                     if (mIsHorizontal) {
-                    	size = getWidth();
-                    	scroll = getScrollX() + (mLastMotionX - x);
-                    	mLastMotionX = x;
+                        size = getWidth();
+                        scroll = getScrollX() + (mLastMotionX - x);
+                        mLastMotionX = x;
                     } else {
-                    	size = getHeight();
-                    	scroll = getScrollY() + (mLastMotionY - y);
-                    	mLastMotionY = y;
+                        size = getHeight();
+                        scroll = getScrollY() + (mLastMotionY - y);
+                        mLastMotionY = y;
                     }
 
                     final float lowerBound = Math.max(0, (mCurItem - 1) * size);
@@ -974,19 +974,19 @@ public class DirectionalViewPager extends LinearLayout {
                     int initialVelocity;
                     float lastMotion;
                     int sizeOverThree;
-                    
+
                     if (mIsHorizontal) {
                         initialVelocity = (int)VelocityTrackerCompat.getXVelocity(
                                 velocityTracker, mActivePointerId);
                         lastMotion = mLastMotionX;
                         sizeOverThree = getWidth() / 3;
                     } else {
-                    	initialVelocity = (int)VelocityTrackerCompat.getYVelocity(
-                    			velocityTracker, mActivePointerId);
-                    	lastMotion = mLastMotionY;
-                    	sizeOverThree = getHeight() / 3;
+                        initialVelocity = (int)VelocityTrackerCompat.getYVelocity(
+                                velocityTracker, mActivePointerId);
+                        lastMotion = mLastMotionY;
+                        sizeOverThree = getHeight() / 3;
                     }
-                    
+
                     mPopulatePending = true;
                     if ((Math.abs(initialVelocity) > mMinimumVelocity)
                             || Math.abs(mInitialMotion-lastMotion) >= sizeOverThree) {
@@ -1013,9 +1013,9 @@ public class DirectionalViewPager extends LinearLayout {
             case MotionEventCompat.ACTION_POINTER_DOWN: {
                 final int index = MotionEventCompat.getActionIndex(ev);
                 if (mIsHorizontal) {
-                	mLastMotionX = MotionEventCompat.getX(ev, index);
+                    mLastMotionX = MotionEventCompat.getX(ev, index);
                 } else {
-                	mLastMotionY = MotionEventCompat.getY(ev, index);
+                    mLastMotionY = MotionEventCompat.getY(ev, index);
                 }
                 mActivePointerId = MotionEventCompat.getPointerId(ev, index);
                 break;
@@ -1024,9 +1024,9 @@ public class DirectionalViewPager extends LinearLayout {
                 onSecondaryPointerUp(ev);
                 final int index = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
                 if (mIsHorizontal) {
-                	mLastMotionX = MotionEventCompat.getX(ev, index);
+                    mLastMotionX = MotionEventCompat.getX(ev, index);
                 } else {
-                	mLastMotionY = MotionEventCompat.getY(ev, index);
+                    mLastMotionY = MotionEventCompat.getY(ev, index);
                 }
                 break;
         }
@@ -1041,9 +1041,9 @@ public class DirectionalViewPager extends LinearLayout {
             // active pointer and adjust accordingly.
             final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
             if (mIsHorizontal) {
-            	mLastMotionX = MotionEventCompat.getX(ev, newPointerIndex);
+                mLastMotionX = MotionEventCompat.getX(ev, newPointerIndex);
             } else {
-            	mLastMotionY = MotionEventCompat.getY(ev, newPointerIndex);
+                mLastMotionY = MotionEventCompat.getY(ev, newPointerIndex);
             }
             mActivePointerId = MotionEventCompat.getPointerId(ev, newPointerIndex);
             if (mVelocityTracker != null) {
