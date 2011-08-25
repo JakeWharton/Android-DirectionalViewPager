@@ -19,6 +19,10 @@ Usage
             android:layout_height="fill_parent"
             android:layout_width="fill_parent" />
 
+    By default the widget will page horizontally. You can alter this behavior by
+    including `android:orientation="vertical"` in the layout or by calling
+    `setOrientation(DirectionalViewPager.VERTICAL)` in your code.
+
   2. In your `onCreate` method (or `onCreateView` for a fragment), bind to a
      `PagerAdapter` implementation.
 
