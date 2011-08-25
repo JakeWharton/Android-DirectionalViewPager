@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.jakewharton.android.verticalviewpager;
+package com.jakewharton.android.directionalviewpager;
 
 import java.util.ArrayList;
 
@@ -42,7 +42,7 @@ import android.widget.LinearLayout;
 import android.widget.Scroller;
 
 /**
- * Layout manager that allows the user to flip up and down
+ * Layout manager that allows the user to flip horizontally or vertically
  * through pages of data.  You supply an implementation of a
  * {@link PagerAdapter} to generate the pages that the view shows.
  *
@@ -51,8 +51,8 @@ import android.widget.Scroller;
  * the compatibility library, requiring changes to the source code
  * of apps when they are compiled against the newer version.</p>
  */
-public class OrientationViewPager extends LinearLayout {
-    private static final String TAG = "ViewPager";
+public class DirectionalViewPager extends LinearLayout {
+    private static final String TAG = "DirectionalViewPager";
     private static final String XML_NS = "http://schemas.android.com/apk/res/android";
     private static final boolean DEBUG = false;
 
@@ -131,12 +131,12 @@ public class OrientationViewPager extends LinearLayout {
 
     private int mScrollState = SCROLL_STATE_IDLE;
 
-    public OrientationViewPager(Context context) {
+    public DirectionalViewPager(Context context) {
         super(context);
         initViewPager();
     }
 
-    public OrientationViewPager(Context context, AttributeSet attrs) {
+    public DirectionalViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         initViewPager();
         

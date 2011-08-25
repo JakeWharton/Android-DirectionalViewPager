@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.jakewharton</groupId>
-	<artifactId>android-verticalviewpager</artifactId>
-	<name>Android-VerticalViewPager</name>
+	<artifactId>android-directionalviewpager</artifactId>
+	<name>Android-DirectionalViewPager</name>
 	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>com.jakewharton</groupId>
-		<artifactId>android-verticalviewpager-parent</artifactId>
+		<artifactId>android-directionalviewpager-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>

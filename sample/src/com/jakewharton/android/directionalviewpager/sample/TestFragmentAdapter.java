@@ -1,4 +1,4 @@
-package com.jakewharton.android.verticalviewpager.sample;
+package com.jakewharton.android.directionalviewpager.sample;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

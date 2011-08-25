@@ -1,7 +1,9 @@
-Android VerticalViewPager
-=========================
+Android DirectionalViewPager
+============================
 
-Vertical implementation of the [compatibility library][1] `ViewPager` class.
+Implementation of the [compatibility library][1] `ViewPager` class that supports
+paging both vertically and horizontally as well as changing between the two
+at runtime.
 
 
 
@@ -12,7 +14,7 @@ Usage
 
   1. Include the widget in your view.
 
-        <com.jakewharton.android.verticalviewpager.VerticalViewPager
+        <com.jakewharton.android.verticalviewpager.DirectionalViewPager
             android:id="@+id/pager"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent" />
@@ -27,7 +29,7 @@ Usage
 Including In Your Project
 -------------------------
 
-Android-ViewPagerIndicator is presented as a standalone `.jar` file. It should
+Android-DirectionalViewPager is presented as a standalone `.jar` file. It should
 included in addition to the compatibility library `.jar`.
 
 You can download the file from the GitHub [downloads page][2] or compile your
@@ -38,7 +40,7 @@ as a dependency:
 
     <dependency>
       <groupId>com.jakewharton</groupid>
-      <artifactId>android-verticalviewpager</artifactId>
+      <artifactId>android-directionalviewpager</artifactId>
       <version>1.0.0</version>
     </dependency>
 
@@ -83,4 +85,4 @@ License
 
 
  [1]: http://developer.android.com/sdk/compatibility-library.html
- [2]: https://github.com/JakeWharton/Android-VerticalViewPager/downloads
+ [2]: https://github.com/JakeWharton/Android-DirectionalViewPager/downloads
