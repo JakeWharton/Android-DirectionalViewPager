@@ -14,7 +14,7 @@ Usage
 
   1. Include the widget in your view.
 
-        <com.jakewharton.android.verticalviewpager.DirectionalViewPager
+        <com.jakewharton.android.directionalviewpager.DirectionalViewPager
             android:id="@+id/pager"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent" />
@@ -22,7 +22,7 @@ Usage
   2. In your `onCreate` method (or `onCreateView` for a fragment), bind to a
      `PagerAdapter` implementation.
 
-         VerticalViewPager pager = (VerticalViewPager)findViewById(R.id.pager);
+         DirectionalViewPager pager = (DirectionalViewPager)findViewById(R.id.pager);
          pager.setAdapter(new TestAdapter(getSupportFragmentManager()));
 
 
