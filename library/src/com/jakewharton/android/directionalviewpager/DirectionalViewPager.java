@@ -34,7 +34,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -150,7 +149,6 @@ public class DirectionalViewPager extends LinearLayout {
     }
 
     void initViewPager() {
-        setFocusable(true);
         setWillNotDraw(false);
         mScroller = new Scroller(getContext());
         final ViewConfiguration configuration = ViewConfiguration.get(getContext());
@@ -526,40 +524,6 @@ public class DirectionalViewPager extends LinearLayout {
             scrollTo(0, mCurItem*getHeight());
         }
         requestLayout();
-    }
-
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        // Let the focused view and/or our descendants get the key first
-        return super.dispatchKeyEvent(event) || executeKeyEvent(event);
-    }
-
-    public boolean executeKeyEvent(KeyEvent event) {
-        if (event.getAction() == KeyEvent.ACTION_DOWN) {
-            if (mIsHorizontal) {
-                switch (event.getKeyCode()) {
-                    case KeyEvent.KEYCODE_DPAD_LEFT:
-                        setCurrentItem(mCurItem - 1);
-                        return true;
-
-                    case KeyEvent.KEYCODE_DPAD_RIGHT:
-                        setCurrentItem(mCurItem + 1);
-                        return true;
-                }
-            } else {
-                switch (event.getKeyCode()) {
-                    case KeyEvent.KEYCODE_DPAD_UP:
-                        setCurrentItem(mCurItem - 1);
-                        return true;
-
-                    case KeyEvent.KEYCODE_DPAD_DOWN:
-                        setCurrentItem(mCurItem + 1);
-                        return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     @Override
