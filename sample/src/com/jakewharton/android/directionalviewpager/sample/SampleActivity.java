@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
-import com.jakewharton.android.directionalviewpager.DirectionalViewPager;
+import com.jakewharton.android.view.DirectionalViewPager;
 
 public class SampleActivity extends FragmentActivity {
     @Override
