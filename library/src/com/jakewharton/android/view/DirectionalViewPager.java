@@ -483,6 +483,15 @@ public class DirectionalViewPager extends ViewPager {
     }
 
     public void setOrientation(int orientation) {
+        switch (orientation) {
+            case HORIZONTAL:
+            case VERTICAL:
+                break;
+
+            default:
+                throw new IllegalArgumentException("Only HORIZONTAL and VERTICAL are valid orientations.");
+        }
+
         if (orientation == mOrientation) {
             return;
         }
