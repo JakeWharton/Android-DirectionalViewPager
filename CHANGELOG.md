@@ -1,8 +1,8 @@
 Change Log
 ==========
 
-Version 1.1.0 *(In Development)*
---------------------------------
+Version 1.1.0 *(2011-09-28)*
+----------------------------
 
  * Extend from `ViewPager` so it can be used with other APIs which require an
    instance of `ViewPager`.
