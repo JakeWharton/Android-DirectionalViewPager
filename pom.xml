@@ -6,7 +6,7 @@
 	<groupId>com.jakewharton</groupId>
 	<artifactId>android-directionalviewpager-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>1.1.0</version>
+	<version>1.1.1-SNAPSHOT</version>
 
 	<name>Android-DirectionalViewPager (Parent)</name>
 	<description>Implementation of the compatibility library ViewPager class that supports both vertical and horizontal paging.</description>
