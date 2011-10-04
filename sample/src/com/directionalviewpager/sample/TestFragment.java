@@ -1,4 +1,4 @@
-package com.jakewharton.android.directionalviewpager.sample;
+package com.directionalviewpager.sample;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
