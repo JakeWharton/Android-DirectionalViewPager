@@ -1,8 +1,8 @@
 Change Log
 ==========
 
-Version 1.2.0 *(In Development)*
---------------------------------
+Version 1.2.0 *(2011-10-04)*
+----------------------------
 
  * Move to `com.directionalviewpager` package.
  * Change maven group and artifact to `com.directionalviewpager:library`.
