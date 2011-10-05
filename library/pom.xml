@@ -3,14 +3,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.jakewharton</groupId>
-	<artifactId>android-directionalviewpager</artifactId>
+	<groupId>com.directionalviewpager</groupId>
+	<artifactId>library</artifactId>
 	<name>Android-DirectionalViewPager</name>
 	<packaging>jar</packaging>
 
 	<parent>
-		<groupId>com.jakewharton</groupId>
-		<artifactId>android-directionalviewpager-parent</artifactId>
+		<groupId>com.directionalviewpager</groupId>
+		<artifactId>parent</artifactId>
 		<version>1.1.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>

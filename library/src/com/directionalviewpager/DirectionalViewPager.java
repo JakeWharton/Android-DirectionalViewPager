@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.jakewharton.android.view;
+package com.directionalviewpager;
 
 import java.util.ArrayList;
 import android.content.Context;

@@ -16,7 +16,7 @@ Usage
 
   1. Include the widget in your view.
 
-        <com.jakewharton.android.view.DirectionalViewPager
+        <com.directionalviewpager.DirectionalViewPager
             android:id="@+id/pager"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent" />
@@ -45,9 +45,9 @@ If you are using maven you can easily include the library by specifying it
 as a dependency:
 
     <dependency>
-      <groupId>com.jakewharton</groupid>
-      <artifactId>android-directionalviewpager</artifactId>
-      <version>1.1.0</version>
+      <groupId>com.directionalviewpager</groupid>
+      <artifactId>library</artifactId>
+      <version>1.2.0</version>
     </dependency>
 
 You must also include the following repository:

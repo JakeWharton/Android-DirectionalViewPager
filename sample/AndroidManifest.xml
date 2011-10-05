@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jakewharton.android.directionalviewpager.sample"
-    android:versionCode="2"
-    android:versionName="1.1.0">
+    package="com.directionalviewpager.sample"
+    android:versionCode="3"
+    android:versionName="1.2.0">
 
     <uses-sdk android:minSdkVersion="4" />
 
     <application android:label="DirectionalViewPager Sample">
-        <activity android:name=".SampleActivity">
+        <activity
+            android:name=".SampleActivity"
+            android:label="Directional ViewPager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
