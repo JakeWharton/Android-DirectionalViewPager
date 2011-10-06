@@ -5,6 +5,8 @@ Implementation of the [compatibility library][1] `ViewPager` class that supports
 paging both vertically and horizontally as well as changing between the two
 at runtime.
 
+Try out the sample application [on the Android Market][4].
+
 ![Example Image][3]
 
 
@@ -93,3 +95,4 @@ License
  [1]: http://developer.android.com/sdk/compatibility-library.html
  [2]: https://github.com/JakeWharton/Android-DirectionalViewPager/downloads
  [3]: https://raw.github.com/JakeWharton/Android-DirectionalViewPager/master/sample/screens.png
+ [4]: https://market.android.com/details?id=com.directionalviewpager.sample
