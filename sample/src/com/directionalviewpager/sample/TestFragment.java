@@ -38,6 +38,7 @@ public final class TestFragment extends Fragment {
 		text.setText(mContent);
 		text.setTextSize(20 * getResources().getDisplayMetrics().density);
 		text.setPadding(20, 20, 20, 20);
+		text.setGravity(Gravity.CENTER);
 		
 		LinearLayout layout = new LinearLayout(getActivity());
 		layout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
