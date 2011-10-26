@@ -1,7 +1,7 @@
 package android.support.v4.view;
 
-public final class VerticalViewPagerCompat {
-    private VerticalViewPagerCompat() {}
+public final class DirectionalViewPagerCompat {
+    private DirectionalViewPagerCompat() {}
 
     public interface DataSetObserver extends PagerAdapter.DataSetObserver {}
 
