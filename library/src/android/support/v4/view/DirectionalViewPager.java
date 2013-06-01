@@ -17,6 +17,8 @@
 
 package android.support.v4.view;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.os.Build;
 import android.os.Parcel;
@@ -31,8 +33,6 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.Scroller;
-
-import java.util.ArrayList;
 
 /**
  * Layout manager that allows the user to flip horizontally or vertically
@@ -124,6 +124,7 @@ public class DirectionalViewPager extends ViewPager {
         }
     }
 
+    @Override
     void initViewPager() {
         super.initViewPager();
         setWillNotDraw(false);
@@ -145,6 +146,7 @@ public class DirectionalViewPager extends ViewPager {
         }
     }
 
+    @Override
     public void setAdapter(PagerAdapter adapter) {
         if (mAdapter != null) {
 
@@ -171,15 +173,18 @@ public class DirectionalViewPager extends ViewPager {
         }
     }
 
+    @Override
     public PagerAdapter getAdapter() {
         return mAdapter;
     }
 
+    @Override
     public void setCurrentItem(int item) {
         mPopulatePending = false;
         setCurrentItemInternal(item, true, false);
     }
 
+    @Override
     void setCurrentItemInternal(int item, boolean smoothScroll, boolean always) {
         if (mAdapter == null || mAdapter.getCount() <= 0) {
             setScrollingCacheEnabled(false);
@@ -227,6 +232,7 @@ public class DirectionalViewPager extends ViewPager {
         }
     }
 
+    @Override
     public void setOnPageChangeListener(OnPageChangeListener listener) {
         mOnPageChangeListener = listener;
     }
@@ -237,6 +243,7 @@ public class DirectionalViewPager extends ViewPager {
      * @param dx the number of pixels to scroll by on the X axis
      * @param dy the number of pixels to scroll by on the Y axis
      */
+    @Override
     void smoothScrollTo(int x, int y) {
         if (getChildCount() == 0) {
             // Nothing to do.
@@ -259,6 +266,7 @@ public class DirectionalViewPager extends ViewPager {
         invalidate();
     }
 
+    @Override
     android.support.v4.view.ViewPager.ItemInfo addNewItem(int position, int index) {
         ItemInfo ii = new ItemInfo();
         ii.position = position;
@@ -271,6 +279,7 @@ public class DirectionalViewPager extends ViewPager {
         return ii;
     }
 
+    @Override
     void dataSetChanged() {
         // This method only gets called if our observer is attached, so mAdapter
         // is non-null.
@@ -321,6 +330,7 @@ public class DirectionalViewPager extends ViewPager {
         }
     }
 
+    @Override
     void populate() {
         if (mAdapter == null) {
             return;
@@ -451,35 +461,6 @@ public class DirectionalViewPager extends ViewPager {
         }
     }
 
-    @Override
-    public Parcelable onSaveInstanceState() {
-        Parcelable superState = super.onSaveInstanceState();
-        SavedState ss = new SavedState(superState);
-        ss.position = mCurItem;
-        ss.adapterState = mAdapter.saveState();
-        return ss;
-    }
-
-    @Override
-    public void onRestoreInstanceState(Parcelable state) {
-        if (!(state instanceof SavedState)) {
-            super.onRestoreInstanceState(state);
-            return;
-        }
-
-        SavedState ss = (SavedState) state;
-        super.onRestoreInstanceState(ss.getSuperState());
-
-        if (mAdapter != null) {
-            mAdapter.restoreState(ss.adapterState, ss.loader);
-            setCurrentItemInternal(ss.position, false, true);
-        } else {
-            mRestoredCurItem = ss.position;
-            mRestoredAdapterState = ss.adapterState;
-            mRestoredClassLoader = ss.loader;
-        }
-    }
-
     public int getOrientation() {
         return mOrientation;
     }
@@ -538,6 +519,7 @@ public class DirectionalViewPager extends ViewPager {
         }
     }
 
+    @Override
     android.support.v4.view.ViewPager.ItemInfo infoForChild(View child) {
         for (int i = 0; i < mItems.size(); i++) {
             ItemInfo ii = mItems.get(i);
