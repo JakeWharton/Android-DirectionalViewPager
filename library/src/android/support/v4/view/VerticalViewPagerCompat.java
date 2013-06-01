@@ -1,11 +1,13 @@
+
 package android.support.v4.view;
 
-public final class VerticalViewPagerCompat {
-    private VerticalViewPagerCompat() {}
+import android.database.DataSetObserver;
 
-    public interface DataSetObserver extends PagerAdapter.DataSetObserver {}
+public final class VerticalViewPagerCompat {
+    private VerticalViewPagerCompat() {
+    }
 
     public static void setDataSetObserver(PagerAdapter adapter, DataSetObserver observer) {
-        adapter.setDataSetObserver(observer);
+        adapter.registerDataSetObserver(observer);
     }
 }

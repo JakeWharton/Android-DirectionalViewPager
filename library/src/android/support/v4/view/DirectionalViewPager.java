@@ -15,21 +15,14 @@
  * limitations under the License.
  */
 
-package com.directionalviewpager;
+package android.support.v4.view;
 
-import java.util.ArrayList;
 import android.content.Context;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.os.ParcelableCompat;
 import android.support.v4.os.ParcelableCompatCreatorCallbacks;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.VelocityTrackerCompat;
-import android.support.v4.view.VerticalViewPagerCompat;
-import android.support.v4.view.ViewConfigurationCompat;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -39,15 +32,18 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.Scroller;
 
+import java.util.ArrayList;
+
 /**
  * Layout manager that allows the user to flip horizontally or vertically
- * through pages of data.  You supply an implementation of a
- * {@link PagerAdapter} to generate the pages that the view shows.
- *
- * <p>Note this class is currently under early design and
- * development.  The API will likely change in later updates of
- * the compatibility library, requiring changes to the source code
- * of apps when they are compiled against the newer version.</p>
+ * through pages of data. You supply an implementation of a {@link PagerAdapter}
+ * to generate the pages that the view shows.
+ * <p>
+ * Note this class is currently under early design and development. The API will
+ * likely change in later updates of the compatibility library, requiring
+ * changes to the source code of apps when they are compiled against the newer
+ * version.
+ * </p>
  */
 public class DirectionalViewPager extends ViewPager {
     private static final String TAG = "DirectionalViewPager";
@@ -59,21 +55,14 @@ public class DirectionalViewPager extends ViewPager {
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
 
-    static class ItemInfo {
-        Object object;
-        int position;
-        boolean scrolling;
-    }
-
     private final ArrayList<ItemInfo> mItems = new ArrayList<ItemInfo>();
 
     private PagerAdapter mAdapter;
-    private int mCurItem;   // Index of currently displayed page.
+    private int mCurItem; // Index of currently displayed page.
     private int mRestoredCurItem = -1;
     private Parcelable mRestoredAdapterState = null;
     private ClassLoader mRestoredClassLoader = null;
     private Scroller mScroller;
-    private VerticalViewPagerCompat.DataSetObserver mObserver;
 
     private int mChildWidthMeasureSpec;
     private int mChildHeightMeasureSpec;
@@ -100,8 +89,8 @@ public class DirectionalViewPager extends ViewPager {
      */
     private int mActivePointerId = INVALID_POINTER;
     /**
-     * Sentinel value for no current active pointer.
-     * Used by {@link #mActivePointerId}.
+     * Sentinel value for no current active pointer. Used by
+     * {@link #mActivePointerId}.
      */
     private static final int INVALID_POINTER = -1;
 
@@ -111,6 +100,8 @@ public class DirectionalViewPager extends ViewPager {
     private VelocityTracker mVelocityTracker;
     private int mMinimumVelocity;
     private int mMaximumVelocity;
+
+    DataSetObserver mObserver;
 
     private OnPageChangeListener mOnPageChangeListener;
 
@@ -125,7 +116,8 @@ public class DirectionalViewPager extends ViewPager {
         super(context, attrs);
         initViewPager();
 
-        //We default to horizontal, only change if a value is explicitly specified
+        // We default to horizontal, only change if a value is explicitly
+        // specified
         int orientation = attrs.getAttributeIntValue(XML_NS, "orientation", -1);
         if (orientation != -1) {
             setOrientation(orientation);
@@ -133,6 +125,7 @@ public class DirectionalViewPager extends ViewPager {
     }
 
     void initViewPager() {
+        super.initViewPager();
         setWillNotDraw(false);
         mScroller = new Scroller(getContext());
         final ViewConfiguration configuration = ViewConfiguration.get(getContext());
@@ -154,6 +147,7 @@ public class DirectionalViewPager extends ViewPager {
 
     public void setAdapter(PagerAdapter adapter) {
         if (mAdapter != null) {
+
             VerticalViewPagerCompat.setDataSetObserver(mAdapter, null);
         }
 
@@ -200,11 +194,11 @@ public class DirectionalViewPager extends ViewPager {
         } else if (item >= mAdapter.getCount()) {
             item = mAdapter.getCount() - 1;
         }
-        if (item > (mCurItem+1) || item < (mCurItem-1)) {
-            // We are doing a jump by more than one page.  To avoid
+        if (item > (mCurItem + 1) || item < (mCurItem - 1)) {
+            // We are doing a jump by more than one page. To avoid
             // glitches, we want to keep all current pages in the view
             // until the scroll ends.
-            for (int i=0; i<mItems.size(); i++) {
+            for (int i = 0; i < mItems.size(); i++) {
                 mItems.get(i).scrolling = true;
             }
         }
@@ -213,9 +207,9 @@ public class DirectionalViewPager extends ViewPager {
         populate();
         if (smoothScroll) {
             if (mOrientation == HORIZONTAL) {
-                smoothScrollTo(getWidth()*item, 0);
+                smoothScrollTo(getWidth() * item, 0);
             } else {
-                smoothScrollTo(0, getHeight()*item);
+                smoothScrollTo(0, getHeight() * item);
             }
             if (dispatchSelected && mOnPageChangeListener != null) {
                 mOnPageChangeListener.onPageSelected(item);
@@ -226,9 +220,9 @@ public class DirectionalViewPager extends ViewPager {
             }
             completeScroll();
             if (mOrientation == HORIZONTAL) {
-                scrollTo(getWidth()*item, 0);
+                scrollTo(getWidth() * item, 0);
             } else {
-                scrollTo(0, getHeight()*item);
+                scrollTo(0, getHeight() * item);
             }
         }
     }
@@ -239,7 +233,7 @@ public class DirectionalViewPager extends ViewPager {
 
     /**
      * Like {@link View#scrollBy}, but scroll smoothly instead of immediately.
-     *
+     * 
      * @param dx the number of pixels to scroll by on the X axis
      * @param dy the number of pixels to scroll by on the Y axis
      */
@@ -265,7 +259,7 @@ public class DirectionalViewPager extends ViewPager {
         invalidate();
     }
 
-    void addNewItem(int position, int index) {
+    android.support.v4.view.ViewPager.ItemInfo addNewItem(int position, int index) {
         ItemInfo ii = new ItemInfo();
         ii.position = position;
         ii.object = mAdapter.instantiateItem(this, position);
@@ -274,10 +268,12 @@ public class DirectionalViewPager extends ViewPager {
         } else {
             mItems.add(index, ii);
         }
+        return ii;
     }
 
     void dataSetChanged() {
-        // This method only gets called if our observer is attached, so mAdapter is non-null.
+        // This method only gets called if our observer is attached, so mAdapter
+        // is non-null.
 
         boolean needPopulate = mItems.isEmpty() && mAdapter.getCount() > 0;
         int newCurrItem = -1;
@@ -330,16 +326,17 @@ public class DirectionalViewPager extends ViewPager {
             return;
         }
 
-        // Bail now if we are waiting to populate.  This is to hold off
+        // Bail now if we are waiting to populate. This is to hold off
         // on creating views from the time the user releases their finger to
         // fling to a new position until we have finished the scroll to
         // that position, avoiding glitches from happening at that point.
         if (mPopulatePending) {
-            if (DEBUG) Log.i(TAG, "populate is pending, skipping for now...");
+            if (DEBUG)
+                Log.i(TAG, "populate is pending, skipping for now...");
             return;
         }
 
-        // Also, don't populate until we are attached to a window.  This is to
+        // Also, don't populate until we are attached to a window. This is to
         // avoid trying to populate before we have restored our view hierarchy
         // state and conflicting with what is restored.
         if (getWindowToken() == null) {
@@ -350,29 +347,32 @@ public class DirectionalViewPager extends ViewPager {
 
         final int startPos = mCurItem > 0 ? mCurItem - 1 : mCurItem;
         final int count = mAdapter.getCount();
-        final int endPos = mCurItem < (count-1) ? mCurItem+1 : count-1;
+        final int endPos = mCurItem < (count - 1) ? mCurItem + 1 : count - 1;
 
-        if (DEBUG) Log.v(TAG, "populating: startPos=" + startPos + " endPos=" + endPos);
+        if (DEBUG)
+            Log.v(TAG, "populating: startPos=" + startPos + " endPos=" + endPos);
 
         // Add and remove pages in the existing list.
         int lastPos = -1;
-        for (int i=0; i<mItems.size(); i++) {
+        for (int i = 0; i < mItems.size(); i++) {
             ItemInfo ii = mItems.get(i);
             if ((ii.position < startPos || ii.position > endPos) && !ii.scrolling) {
-                if (DEBUG) Log.i(TAG, "removing: " + ii.position + " @ " + i);
+                if (DEBUG)
+                    Log.i(TAG, "removing: " + ii.position + " @ " + i);
                 mItems.remove(i);
                 i--;
                 mAdapter.destroyItem(this, ii.position, ii.object);
             } else if (lastPos < endPos && ii.position > startPos) {
                 // The next item is outside of our range, but we have a gap
                 // between it and the last item where we want to have a page
-                // shown.  Fill in the gap.
+                // shown. Fill in the gap.
                 lastPos++;
                 if (lastPos < startPos) {
                     lastPos = startPos;
                 }
                 while (lastPos <= endPos && lastPos < ii.position) {
-                    if (DEBUG) Log.i(TAG, "inserting: " + lastPos + " @ " + i);
+                    if (DEBUG)
+                        Log.i(TAG, "inserting: " + lastPos + " @ " + i);
                     addNewItem(lastPos, i);
                     lastPos++;
                     i++;
@@ -382,12 +382,13 @@ public class DirectionalViewPager extends ViewPager {
         }
 
         // Add any new pages we need at the end.
-        lastPos = mItems.size() > 0 ? mItems.get(mItems.size()-1).position : -1;
+        lastPos = mItems.size() > 0 ? mItems.get(mItems.size() - 1).position : -1;
         if (lastPos < endPos) {
             lastPos++;
             lastPos = lastPos > startPos ? lastPos : startPos;
             while (lastPos <= endPos) {
-                if (DEBUG) Log.i(TAG, "appending: " + lastPos);
+                if (DEBUG)
+                    Log.i(TAG, "appending: " + lastPos);
                 addNewItem(lastPos, -1);
                 lastPos++;
             }
@@ -395,7 +396,7 @@ public class DirectionalViewPager extends ViewPager {
 
         if (DEBUG) {
             Log.i(TAG, "Current page list:");
-            for (int i=0; i<mItems.size(); i++) {
+            for (int i = 0; i < mItems.size(); i++) {
                 Log.i(TAG, "#" + i + ": page " + mItems.get(i).position);
             }
         }
@@ -426,12 +427,13 @@ public class DirectionalViewPager extends ViewPager {
                     + " position=" + position + "}";
         }
 
-        public static final Parcelable.Creator<SavedState> CREATOR
-                = ParcelableCompat.newCreator(new ParcelableCompatCreatorCallbacks<SavedState>() {
+        public static final Parcelable.Creator<SavedState> CREATOR = ParcelableCompat
+                .newCreator(new ParcelableCompatCreatorCallbacks<SavedState>() {
                     @Override
                     public SavedState createFromParcel(Parcel in, ClassLoader loader) {
                         return new SavedState(in, loader);
                     }
+
                     @Override
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];
@@ -465,7 +467,7 @@ public class DirectionalViewPager extends ViewPager {
             return;
         }
 
-        SavedState ss = (SavedState)state;
+        SavedState ss = (SavedState) state;
         super.onRestoreInstanceState(ss.getSuperState());
 
         if (mAdapter != null) {
@@ -489,17 +491,18 @@ public class DirectionalViewPager extends ViewPager {
                 break;
 
             default:
-                throw new IllegalArgumentException("Only HORIZONTAL and VERTICAL are valid orientations.");
+                throw new IllegalArgumentException(
+                        "Only HORIZONTAL and VERTICAL are valid orientations.");
         }
 
         if (orientation == mOrientation) {
             return;
         }
 
-        //Complete any scroll we are currently in the middle of
+        // Complete any scroll we are currently in the middle of
         completeScroll();
 
-        //Reset values
+        // Reset values
         mInitialMotion = 0;
         mLastMotionX = 0;
         mLastMotionY = 0;
@@ -507,7 +510,7 @@ public class DirectionalViewPager extends ViewPager {
             mVelocityTracker.clear();
         }
 
-        //Adjust scroll for new orientation
+        // Adjust scroll for new orientation
         mOrientation = orientation;
         if (mOrientation == HORIZONTAL) {
             scrollTo(mCurItem * getWidth(), 0);
@@ -535,8 +538,8 @@ public class DirectionalViewPager extends ViewPager {
         }
     }
 
-    ItemInfo infoForChild(View child) {
-        for (int i=0; i<mItems.size(); i++) {
+    android.support.v4.view.ViewPager.ItemInfo infoForChild(View child) {
+        for (int i = 0; i < mItems.size(); i++) {
             ItemInfo ii = mItems.get(i);
             if (mAdapter.isViewFromObject(child, ii.object)) {
                 return ii;
@@ -557,7 +560,7 @@ public class DirectionalViewPager extends ViewPager {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // For simple implementation, or internal size is always 0.
         // We depend on the container to specify the layout size of
-        // our view.  We can't really know what it is since we will be
+        // our view. We can't really know what it is since we will be
         // adding and removing different arbitrary views and do not
         // want the layout to change as this happens.
         setMeasuredDimension(getDefaultSize(0, widthMeasureSpec),
@@ -579,8 +582,9 @@ public class DirectionalViewPager extends ViewPager {
         for (int i = 0; i < size; ++i) {
             final View child = getChildAt(i);
             if (child.getVisibility() != GONE) {
-                if (DEBUG) Log.v(TAG, "Measuring #" + i + " " + child
-                + ": " + mChildWidthMeasureSpec + " x " + mChildHeightMeasureSpec);
+                if (DEBUG)
+                    Log.v(TAG, "Measuring #" + i + " " + child
+                            + ": " + mChildWidthMeasureSpec + " x " + mChildHeightMeasureSpec);
                 child.measure(mChildWidthMeasureSpec, mChildHeightMeasureSpec);
             }
         }
@@ -592,13 +596,13 @@ public class DirectionalViewPager extends ViewPager {
 
         // Make sure scroll position is set correctly.
         if (mOrientation == HORIZONTAL) {
-            int scrollPos = mCurItem*w;
+            int scrollPos = mCurItem * w;
             if (scrollPos != getScrollX()) {
                 completeScroll();
                 scrollTo(scrollPos, getScrollY());
             }
         } else {
-            int scrollPos = mCurItem*h;
+            int scrollPos = mCurItem * h;
             if (scrollPos != getScrollY()) {
                 completeScroll();
                 scrollTo(getScrollX(), scrollPos);
@@ -613,13 +617,13 @@ public class DirectionalViewPager extends ViewPager {
         mInLayout = false;
 
         final int count = getChildCount();
-        final int size = (mOrientation == HORIZONTAL) ? r-l : b-t;
+        final int size = (mOrientation == HORIZONTAL) ? r - l : b - t;
 
         for (int i = 0; i < count; i++) {
             View child = getChildAt(i);
             ItemInfo ii;
-            if (child.getVisibility() != GONE && (ii=infoForChild(child)) != null) {
-                int off = size*ii.position;
+            if (child.getVisibility() != GONE && (ii = infoForChild(child)) != null) {
+                int off = size * ii.position;
                 int childLeft = getPaddingLeft();
                 int childTop = getPaddingTop();
                 if (mOrientation == HORIZONTAL) {
@@ -627,9 +631,10 @@ public class DirectionalViewPager extends ViewPager {
                 } else {
                     childTop += off;
                 }
-                if (DEBUG) Log.v(TAG, "Positioning #" + i + " " + child + " f=" + ii.object
-                + ":" + childLeft + "," + childTop + " " + child.getMeasuredWidth()
-                + "x" + child.getMeasuredHeight());
+                if (DEBUG)
+                    Log.v(TAG, "Positioning #" + i + " " + child + " f=" + ii.object
+                            + ":" + childLeft + "," + childTop + " " + child.getMeasuredWidth()
+                            + "x" + child.getMeasuredHeight());
                 child.layout(childLeft, childTop,
                         childLeft + child.getMeasuredWidth(),
                         childTop + child.getMeasuredHeight());
@@ -639,10 +644,12 @@ public class DirectionalViewPager extends ViewPager {
 
     @Override
     public void computeScroll() {
-        if (DEBUG) Log.i(TAG, "computeScroll: finished=" + mScroller.isFinished());
+        if (DEBUG)
+            Log.i(TAG, "computeScroll: finished=" + mScroller.isFinished());
         if (!mScroller.isFinished()) {
             if (mScroller.computeScrollOffset()) {
-                if (DEBUG) Log.i(TAG, "computeScroll: still scrolling");
+                if (DEBUG)
+                    Log.i(TAG, "computeScroll: still scrolling");
                 int oldX = getScrollX();
                 int oldY = getScrollY();
                 int x = mScroller.getCurrX();
@@ -681,7 +688,7 @@ public class DirectionalViewPager extends ViewPager {
 
     private void completeScroll() {
         boolean needPopulate;
-        if ((needPopulate=mScrolling)) {
+        if ((needPopulate = mScrolling)) {
             // Done with scroll, no longer want to cache view drawing.
             setScrollingCacheEnabled(false);
             mScroller.abortAnimation();
@@ -696,7 +703,7 @@ public class DirectionalViewPager extends ViewPager {
         }
         mPopulatePending = false;
         mScrolling = false;
-        for (int i=0; i<mItems.size(); i++) {
+        for (int i = 0; i < mItems.size(); i++) {
             ItemInfo ii = mItems.get(i);
             if (ii.scrolling) {
                 needPopulate = true;
@@ -721,7 +728,8 @@ public class DirectionalViewPager extends ViewPager {
         // Always take care of the touch gesture being complete.
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
             // Release the drag.
-            if (DEBUG) Log.v(TAG, "Intercept done!");
+            if (DEBUG)
+                Log.v(TAG, "Intercept done!");
             mIsBeingDragged = false;
             mIsUnableToDrag = false;
             mActivePointerId = INVALID_POINTER;
@@ -732,11 +740,13 @@ public class DirectionalViewPager extends ViewPager {
         // are dragging.
         if (action != MotionEvent.ACTION_DOWN) {
             if (mIsBeingDragged) {
-                if (DEBUG) Log.v(TAG, "Intercept returning true!");
+                if (DEBUG)
+                    Log.v(TAG, "Intercept returning true!");
                 return true;
             }
             if (mIsUnableToDrag) {
-                if (DEBUG) Log.v(TAG, "Intercept returning false!");
+                if (DEBUG)
+                    Log.v(TAG, "Intercept returning false!");
                 return false;
             }
         }
@@ -744,17 +754,20 @@ public class DirectionalViewPager extends ViewPager {
         switch (action) {
             case MotionEvent.ACTION_MOVE: {
                 /*
-                 * mIsBeingDragged == false, otherwise the shortcut would have caught it. Check
-                 * whether the user has moved far enough from his original down touch.
+                 * mIsBeingDragged == false, otherwise the shortcut would have
+                 * caught it. Check whether the user has moved far enough from
+                 * his original down touch.
                  */
 
                 /*
-                * Locally do absolute value. mLastMotionY is set to the y value
-                * of the down event.
-                */
+                 * Locally do absolute value. mLastMotionY is set to the y value
+                 * of the down event.
+                 */
                 final int activePointerId = mActivePointerId;
-                if (activePointerId == INVALID_POINTER && Build.VERSION.SDK_INT > Build.VERSION_CODES.DONUT) {
-                    // If we don't have a valid id, the touch down wasn't on content.
+                if (activePointerId == INVALID_POINTER
+                        && Build.VERSION.SDK_INT > Build.VERSION_CODES.DONUT) {
+                    // If we don't have a valid id, the touch down wasn't on
+                    // content.
                     break;
                 }
 
@@ -774,11 +787,12 @@ public class DirectionalViewPager extends ViewPager {
                     secondaryDiff = xDiff;
                 }
 
-
-                if (DEBUG) Log.v(TAG, "Moved x to " + x + "," + y + " diff=" + xDiff + "," + yDiff);
+                if (DEBUG)
+                    Log.v(TAG, "Moved x to " + x + "," + y + " diff=" + xDiff + "," + yDiff);
 
                 if (primaryDiff > mTouchSlop && primaryDiff > secondaryDiff) {
-                    if (DEBUG) Log.v(TAG, "Starting drag!");
+                    if (DEBUG)
+                        Log.v(TAG, "Starting drag!");
                     mIsBeingDragged = true;
                     setScrollState(SCROLL_STATE_DRAGGING);
                     if (mOrientation == HORIZONTAL) {
@@ -790,10 +804,11 @@ public class DirectionalViewPager extends ViewPager {
                 } else {
                     if (secondaryDiff > mTouchSlop) {
                         // The finger has moved enough in the vertical
-                        // direction to be counted as a drag...  abort
+                        // direction to be counted as a drag... abort
                         // any attempt to drag horizontally, to work correctly
                         // with children that have scrolling containers.
-                        if (DEBUG) Log.v(TAG, "Starting unable to drag!");
+                        if (DEBUG)
+                            Log.v(TAG, "Starting unable to drag!");
                         mIsUnableToDrag = true;
                     }
                 }
@@ -802,8 +817,8 @@ public class DirectionalViewPager extends ViewPager {
 
             case MotionEvent.ACTION_DOWN: {
                 /*
-                 * Remember location of down touch.
-                 * ACTION_DOWN always refers to pointer index 0.
+                 * Remember location of down touch. ACTION_DOWN always refers to
+                 * pointer index 0.
                  */
                 if (mOrientation == HORIZONTAL) {
                     mLastMotionX = mInitialMotion = ev.getX();
@@ -825,9 +840,10 @@ public class DirectionalViewPager extends ViewPager {
                     mIsUnableToDrag = false;
                 }
 
-                if (DEBUG) Log.v(TAG, "Down at " + mLastMotionX + "," + mLastMotionY
-                        + " mIsBeingDragged=" + mIsBeingDragged
-                        + "mIsUnableToDrag=" + mIsUnableToDrag);
+                if (DEBUG)
+                    Log.v(TAG, "Down at " + mLastMotionX + "," + mLastMotionY
+                            + " mIsBeingDragged=" + mIsBeingDragged
+                            + "mIsUnableToDrag=" + mIsUnableToDrag);
                 break;
             }
 
@@ -837,9 +853,9 @@ public class DirectionalViewPager extends ViewPager {
         }
 
         /*
-        * The only time we want to intercept motion events is if we are in the
-        * drag mode.
-        */
+         * The only time we want to intercept motion events is if we are in the
+         * drag mode.
+         */
         return mIsBeingDragged;
     }
 
@@ -847,7 +863,8 @@ public class DirectionalViewPager extends ViewPager {
     public boolean onTouchEvent(MotionEvent ev) {
 
         if (ev.getAction() == MotionEvent.ACTION_DOWN && ev.getEdgeFlags() != 0) {
-            // Don't handle edge touches immediately -- they may actually belong to one of our
+            // Don't handle edge touches immediately -- they may actually belong
+            // to one of our
             // descendants.
             return false;
         }
@@ -883,7 +900,8 @@ public class DirectionalViewPager extends ViewPager {
             }
             case MotionEvent.ACTION_MOVE:
                 if (!mIsBeingDragged) {
-                    final int pointerIndex = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
+                    final int pointerIndex = MotionEventCompat.findPointerIndex(ev,
+                            mActivePointerId);
                     final float x = MotionEventCompat.getX(ev, pointerIndex);
                     final float y = MotionEventCompat.getY(ev, pointerIndex);
                     final float xDiff = Math.abs(x - mLastMotionX);
@@ -899,10 +917,11 @@ public class DirectionalViewPager extends ViewPager {
                         secondaryDiff = xDiff;
                     }
 
-
-                    if (DEBUG) Log.v(TAG, "Moved x to " + x + "," + y + " diff=" + xDiff + "," + yDiff);
+                    if (DEBUG)
+                        Log.v(TAG, "Moved x to " + x + "," + y + " diff=" + xDiff + "," + yDiff);
                     if (primaryDiff > mTouchSlop && primaryDiff > secondaryDiff) {
-                        if (DEBUG) Log.v(TAG, "Starting drag!");
+                        if (DEBUG)
+                            Log.v(TAG, "Starting drag!");
                         mIsBeingDragged = true;
                         if (mOrientation == HORIZONTAL) {
                             mLastMotionX = x;
@@ -968,12 +987,12 @@ public class DirectionalViewPager extends ViewPager {
                     int sizeOverThree;
 
                     if (mOrientation == HORIZONTAL) {
-                        initialVelocity = (int)VelocityTrackerCompat.getXVelocity(
+                        initialVelocity = (int) VelocityTrackerCompat.getXVelocity(
                                 velocityTracker, mActivePointerId);
                         lastMotion = mLastMotionX;
                         sizeOverThree = getWidth() / 3;
                     } else {
-                        initialVelocity = (int)VelocityTrackerCompat.getYVelocity(
+                        initialVelocity = (int) VelocityTrackerCompat.getYVelocity(
                                 velocityTracker, mActivePointerId);
                         lastMotion = mLastMotionY;
                         sizeOverThree = getHeight() / 3;
@@ -981,11 +1000,11 @@ public class DirectionalViewPager extends ViewPager {
 
                     mPopulatePending = true;
                     if ((Math.abs(initialVelocity) > mMinimumVelocity)
-                            || Math.abs(mInitialMotion-lastMotion) >= sizeOverThree) {
+                            || Math.abs(mInitialMotion - lastMotion) >= sizeOverThree) {
                         if (lastMotion > mInitialMotion) {
-                            setCurrentItemInternal(mCurItem-1, true, true);
+                            setCurrentItemInternal(mCurItem - 1, true, true);
                         } else {
-                            setCurrentItemInternal(mCurItem+1, true, true);
+                            setCurrentItemInternal(mCurItem + 1, true, true);
                         }
                     } else {
                         setCurrentItemInternal(mCurItem, true, true);
@@ -1069,9 +1088,10 @@ public class DirectionalViewPager extends ViewPager {
         }
     }
 
-    private class DataSetObserver implements VerticalViewPagerCompat.DataSetObserver {
+    private class DataSetObserver extends android.database.DataSetObserver {
+
         @Override
-        public void onDataSetChanged() {
+        public void onChanged() {
             dataSetChanged();
         }
     }

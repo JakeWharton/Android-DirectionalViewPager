@@ -2,9 +2,9 @@ package com.directionalviewpager.sample;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.DirectionalViewPager;
 import android.view.View;
 import android.widget.Button;
-import com.directionalviewpager.DirectionalViewPager;
 
 public class SampleActivity extends FragmentActivity {
     @Override
