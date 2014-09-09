@@ -239,6 +239,7 @@ public class DirectionalViewPager extends ViewPager {
                 populate();
             }
         }
+         super.setAdapter(adapter);
     }
 
     public PagerAdapter getAdapter() {
